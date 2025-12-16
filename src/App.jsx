@@ -50,6 +50,7 @@ function App() {
 
   return (
     <div className="app">
+      <div className="grain-overlay"></div>
       <CustomCursor />
 
       {/* Navigation */}
@@ -84,14 +85,14 @@ function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Premium Homestyle <br /> Meals, Daily.
+              Premium <span style={{ fontStyle: 'italic', fontFamily: 'Playfair Display' }}>Homestyle</span> <br /> Meals, Daily.
             </motion.h1>
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              The comfort of home-cooked food, the quality of a chef's kitchen. Flexible plans for your busy lifestyle.
+              The comfort of home-cooked food, the quality of a <span className="text-gold" style={{ fontWeight: '700' }}>chef's kitchen</span>. Flexible plans for your busy lifestyle.
             </motion.p>
             <div className="hero-actions" style={{ justifyContent: 'flex-start' }}>
               <motion.button
@@ -103,7 +104,7 @@ function App() {
               </motion.button>
               <motion.button
                 className="btn btn-outline"
-                style={{ marginLeft: '1rem', color: '#fff', borderColor: '#fff' }}
+                style={{ marginLeft: '1rem', color: '#fff', borderColor: 'rgba(255,255,255,0.5)' }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
