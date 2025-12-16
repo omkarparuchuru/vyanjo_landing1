@@ -7,6 +7,7 @@ import CustomCursor from './components/CustomCursor';
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     // Scroll Logic
@@ -48,6 +49,8 @@ function App() {
     visible: { transition: { staggerChildren: 0.2 } }
   };
 
+  const toggleMenu = () => setMobileMenuOpen(!mobileMenuOpen);
+
   return (
     <div className="app">
       <div className="grain-overlay"></div>
@@ -56,17 +59,41 @@ function App() {
       {/* Navigation */}
       <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
         <div className="container flex-center" style={{ justifyContent: 'space-between', height: '100%' }}>
-          <a href="#" className="logo">
+          <a href="#" className="logo" style={{ zIndex: 1002 }}>
             <img src="/logo.png" alt="Vyanjo" />
           </a>
-          <div className="nav-links">
+
+          {/* Desktop Nav */}
+          <div className="nav-links desktop-only">
             <a href="#menu">Menu</a>
             <a href="#about">Our Story</a>
             <a href="#plans">Plans</a>
           </div>
-          <button className="btn btn-primary" href="#plans">Get Started</button>
+          <button className="btn btn-primary desktop-only" href="#plans">Get Started</button>
+
+          {/* Mobile Toggle */}
+          <button className="mobile-menu-toggle" onClick={toggleMenu} aria-label="Toggle Menu">
+            <span className={`hamburger-line ${mobileMenuOpen ? 'open' : ''}`}></span>
+            <span className={`hamburger-line ${mobileMenuOpen ? 'open' : ''}`}></span>
+            <span className={`hamburger-line ${mobileMenuOpen ? 'open' : ''}`}></span>
+          </button>
         </div>
       </nav>
+
+      {/* Mobile Menu Overlay */}
+      <motion.div
+        className={`mobile-menu ${mobileMenuOpen ? 'active' : ''}`}
+        initial={{ opacity: 0, pointerEvents: 'none' }}
+        animate={{ opacity: mobileMenuOpen ? 1 : 0, pointerEvents: mobileMenuOpen ? 'all' : 'none' }}
+        transition={{ duration: 0.3 }}
+      >
+        <div className="mobile-links">
+          <a href="#menu" onClick={toggleMenu}>Menu</a>
+          <a href="#about" onClick={toggleMenu}>Our Story</a>
+          <a href="#plans" onClick={toggleMenu}>Plans</a>
+          <button className="btn btn-primary" onClick={toggleMenu} style={{ marginTop: '2rem' }}>Get Started</button>
+        </div>
+      </motion.div>
 
       {/* Hero Section */}
       <header className="hero">
